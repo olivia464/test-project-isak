@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { signIn, signUp } from "./actions";
+import { SocialAuth } from "./social-auth";
 
 export default async function LoginPage({
   searchParams,
@@ -46,6 +47,14 @@ export default async function LoginPage({
             {error}
           </p>
         )}
+
+        <SocialAuth />
+
+        <div className="my-8 flex items-center gap-4 text-[10px] uppercase tracking-[0.18em] text-ink-muted">
+          <span aria-hidden="true" className="flex-1 border-t-2 border-hairline" />
+          <span>Or with email</span>
+          <span aria-hidden="true" className="flex-1 border-t-2 border-hairline" />
+        </div>
 
         <form className="space-y-4">
           <Field label="Email">
