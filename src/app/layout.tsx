@@ -9,8 +9,8 @@ const haasAlike = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Todo + AI",
-  description: "Tiny todo app with a Claude-powered task breakdown helper.",
+  title: "To Do + AI",
+  description: "Tiny to-do app with a Claude-powered task breakdown helper.",
 };
 
 export default function RootLayout({

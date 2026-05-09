@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { TodoList } from "./todo-list";
+import { DateInput } from "./date-input";
 import { addTodo, signOut } from "./actions";
 
 export default async function HomePage() {
@@ -23,7 +24,7 @@ export default async function HomePage() {
       <header className="sticky top-0 z-40 border-b-2 border-hairline bg-background">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
           <span className="text-[11px] font-bold uppercase tracking-[0.18em]">
-            Todo / AI
+            To Do / AI
           </span>
           <div className="flex items-center gap-4">
             <span className="hidden text-[11px] uppercase tracking-[0.14em] text-ink-muted sm:inline">
@@ -43,7 +44,7 @@ export default async function HomePage() {
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-12">
         <h1 className="mb-2 text-[clamp(3rem,9vw,7rem)] font-black uppercase leading-[0.85] tracking-[-0.03em]">
-          Todos
+          To Dos
         </h1>
         <p className="mb-10 max-w-md text-sm uppercase tracking-[0.14em] text-ink-muted">
           A working list, kept short and broken down by Claude when it gets unwieldy.
@@ -60,9 +61,8 @@ export default async function HomePage() {
             placeholder="What needs doing?"
             className="min-w-0 flex-1 bg-background px-4 py-3 text-sm placeholder:text-ink-muted focus:bg-accent focus:outline-none"
           />
-          <input
+          <DateInput
             name="due_date"
-            type="date"
             aria-label="Due date (optional)"
             title="Due date (optional)"
             className="border-l-2 border-hairline bg-background px-4 py-3 text-sm focus:bg-accent focus:outline-none"
