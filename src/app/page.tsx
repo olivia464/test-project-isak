@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { TodoList } from "./todo-list";
 import { DateInput } from "./date-input";
-import { addTodo, signOut } from "./actions";
+import { addTodo, clearCompleted, signOut } from "./actions";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -18,6 +18,9 @@ export default async function HomePage() {
     .from("todos")
     .select("id, title, completed, description, due_date, created_at")
     .order("created_at", { ascending: false });
+
+  const total = todos?.length ?? 0;
+  const doneCount = todos?.filter((t) => t.completed).length ?? 0;
 
   return (
     <div className="flex flex-1 flex-col">
@@ -46,9 +49,29 @@ export default async function HomePage() {
         <h1 className="mb-2 text-[clamp(3rem,9vw,7rem)] font-black uppercase leading-[0.85] tracking-[-0.03em]">
           To Dos
         </h1>
-        <p className="mb-10 max-w-md text-sm uppercase tracking-[0.14em] text-ink-muted">
-          A working list, kept short and broken down by Claude when it gets unwieldy.
-        </p>
+        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+          <p className="max-w-md text-sm uppercase tracking-[0.14em] text-ink-muted">
+            A working list, kept short and broken down by Claude when it gets unwieldy.
+          </p>
+          {total > 0 && (
+            <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em]">
+              <span>
+                <span className="text-foreground">{doneCount}</span>
+                <span className="text-ink-muted"> / {total} done</span>
+              </span>
+              {doneCount > 0 && (
+                <form action={clearCompleted}>
+                  <button
+                    type="submit"
+                    className="border-2 border-hairline bg-background px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] hover:bg-hot hover:text-background"
+                  >
+                    Clear done
+                  </button>
+                </form>
+              )}
+            </div>
+          )}
+        </div>
 
         <form
           action={addTodo}

@@ -65,6 +65,21 @@ export async function deleteTodo(id: string) {
   revalidatePath("/");
 }
 
+export async function clearCompleted() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  await supabase
+    .from("todos")
+    .delete()
+    .eq("user_id", user.id)
+    .eq("completed", true);
+  revalidatePath("/");
+}
+
 export async function addSubtasks(titles: string[]) {
   const cleaned = titles
     .map((t) => t.trim())

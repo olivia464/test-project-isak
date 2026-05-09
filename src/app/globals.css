@@ -5,9 +5,9 @@
   --foreground: #000000;
   --ink-muted: #6b6b6b;
   --hairline: #000000;
-  --accent: #00ff19;
+  --accent: #ffd1dc;
   --accent-ink: #000000;
-  --hot: #ff4f93;
+  --hot: #e11d48;
 }
 
 @theme inline {

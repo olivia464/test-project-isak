@@ -9,6 +9,9 @@ const haasAlike = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://test-project-isak.vercel.app",
+  ),
   title: "To Do + AI",
   description: "Tiny to-do app with a Claude-powered task breakdown helper.",
 };
